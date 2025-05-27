@@ -30,10 +30,10 @@ class DoubleLinkedList:
             yield cur.data
             cur = cur.next
     
-    def __repr__(self):
-        elems = ", ".join(map(str,self))
-        return f"[{elems}] :: (len={self._len})"
-    
     def __len__(self):
         return self._len
+
+    def __repr__(self):
+        elems = ", ".join(map(str, self))
+        return f"[{elems}] :: (len={self._len})"
         
