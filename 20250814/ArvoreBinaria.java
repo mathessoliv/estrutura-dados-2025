@@ -82,4 +82,33 @@ public class ArvoreBinaria implements Arvore {
         throw new UnsupportedOperationException("Unimplemented method 'imprime_preFixado'");
     }
 
+    public void imprimirEstrutura() {
+        System.out.println("Estrutura da árvore (com direções):");
+        if (raiz != null) {
+            System.out.println("Raiz: " + raiz.chave);
+            imprimirEstrutura(raiz, "", true);
+        } else {
+            System.out.println("Árvore vazia");
+        }
+    }
+
+    private void imprimirEstrutura(NodoArvore no, String prefixo, boolean isUltimo) {
+        if (no != null) {
+            // Imprimir filhos
+            if (no.filhoEsquerda != null || no.filhoDireita != null) {
+                if (no.filhoEsquerda != null) {
+                    System.out.println(prefixo + (no.filhoDireita != null ? "├── " : "└── ") +
+                            "ESQ: " + no.filhoEsquerda.chave);
+                    imprimirEstrutura(no.filhoEsquerda,
+                            prefixo + (no.filhoDireita != null ? "│   " : "    "),
+                            no.filhoDireita == null);
+                }
+                if (no.filhoDireita != null) {
+                    System.out.println(prefixo + "└── DIR: " + no.filhoDireita.chave);
+                    imprimirEstrutura(no.filhoDireita, prefixo + "    ", true);
+                }
+            }
+        }
+    }
+
 }
