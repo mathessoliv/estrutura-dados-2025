@@ -10,5 +10,7 @@ public class TestarArvore {
         arvore.inserir(35);
 
         arvore.imprimirEstrutura();
+
+        arvore.imprime_preFixado();
     }
 }
