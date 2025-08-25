@@ -112,7 +112,7 @@ public class ArvoreBinaria implements Arvore {
 
     @Override
     public void imprime_inOrdem() {
-
+        imprime_inOrdemRecursivo(this.raiz);
     }
 
     public void imprime_inOrdemRecursivo(NodoArvore noAtual) {
