@@ -45,9 +45,11 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
         }
 
         // Caso recursivo: desce na árvore
-        if (noAtual.objeto.compareTo(objeto) >= 1) {
+        // Os erros estão neste trecho de código. Com correções aqui o programa funciona corretamente.
+        // As correções estão na pasta 20250825_comparable
+        if (objeto.compareTo(noAtual.objeto) <= 1) {
             noAtual.filhoEsquerda = inserirRecursivo(noAtual.filhoEsquerda, objeto);
-        } else if (noAtual.objeto.compareTo(objeto) < 1) {
+        } else if (objeto.compareTo(noAtual.objeto) > 1) {
             noAtual.filhoDireita = inserirRecursivo(noAtual.filhoDireita, objeto);
         }
         
@@ -81,7 +83,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
             return noAtual;
         }
 
-        if (noAtual.objeto.compareTo(objeto) <= 1) {
+        if (objeto.compareTo(noAtual.objeto) <1) {
             return pesquisaRecursivo(noAtual.filhoEsquerda, objeto);
         } else {
             return pesquisaRecursivo(noAtual.filhoDireita, objeto);
@@ -90,14 +92,6 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
     
     // --- MÉTODO DE IMPRESSÃO (CAMINHAMENTO) ---
     
-    
-
-    @Override
-    public void remover(T objeto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remover'");
-    }
-
     /**
      * Imprime os elementos da árvore usando o caminhamento pré-fixado. [cite: 7]
      * Raiz -> Esquerda -> Direita. 
@@ -105,6 +99,13 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
     @Override
     public void imprimePreFixado() {
         imprimePreFixadoRecursivo(this.raiz);
+    }
+    
+
+    @Override
+    public void remover(T objeto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remover'");
     }
 
 
@@ -162,5 +163,6 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
             imprimeEmOrdemRecursivo(no.filhoDireita);
         }
     }
+    
 
 }
