@@ -4,13 +4,13 @@
  * * @author Equipe da Disciplina
  * @version 2025.08.14
  */
-public class ArvoreBinaria<T> implements Arvore<T> {
-
+public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
+    NodoArvore<T> raiz
 
     /**
      * Construtor da árvore. Inicia uma árvore vazia.
      */
-    public ArvoreBinaria<T>() {
+    public ArvoreBinaria() {
         this.raiz = null;
     }
 
@@ -24,7 +24,7 @@ public class ArvoreBinaria<T> implements Arvore<T> {
      */
     @Override
     public void inserir(T objeto) {
-        this.raiz = inserirRecursivo(this.raiz, valor);
+        this.raiz = inserirRecursivo(this.raiz, objeto);
     }
 
     /**
@@ -41,14 +41,14 @@ public class ArvoreBinaria<T> implements Arvore<T> {
     private NodoArvore<T> inserirRecursivo(NodoArvore<T> noAtual, T objeto) {
         // Caso base: se a árvore (ou subárvore) estiver vazia, cria o novo nó.
         if (noAtual == null) {
-            return new NodoArvore(valor);
+            return new NodoArvore(objeto);
         }
 
         // Caso recursivo: desce na árvore
-        if (valor < noAtual.chave) {
-            noAtual.filhoEsquerdo = inserirRecursivo(noAtual.filhoEsquerdo, valor);
-        } else if (valor > noAtual.chave) {
-            noAtual.filhoDireito = inserirRecursivo(noAtual.filhoDireito, valor);
+        if (objeto.compareTo(noAtual.objeto) <1) {
+            noAtual.filhoEsquerda = inserirRecursivo(noAtual.filhoEsquerda, objeto);
+        } else if (objeto.compareTo(noAtual.objeto) > 1) {
+            noAtual.filhoDireita = inserirRecursivo(noAtual.filhoDireita, objeto);
         }
         
         // Se o valor já existe, não faz nada e retorna o nó como está.
@@ -81,10 +81,10 @@ public class ArvoreBinaria<T> implements Arvore<T> {
             return noAtual;
         }
 
-        if (objeto < noAtual.objeto) {
-            return pesquisaRecursivo(noAtual.filhoEsquerdo, objeto);
+        if (objeto.compareTo(noAtual.objeto) <1) {
+            return pesquisaRecursivo(noAtual.filhoEsquerda, objeto);
         } else {
-            return pesquisaRecursivo(noAtual.filhoDireito, objeto);
+            return pesquisaRecursivo(noAtual.filhoDireita, objeto);
         }
     }
     
@@ -96,13 +96,27 @@ public class ArvoreBinaria<T> implements Arvore<T> {
      */
     @Override
     public void imprimePreFixado() {
+        imprimePreFixadoRecursivo(this.raiz);
     }
     
+
+    @Override
+    public void remover(T objeto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remover'");
+    }
+
+
     /**
      * Método auxiliar recursivo para o caminhamento pré-fixado.
      * @param no O nó raiz da subárvore a ser impressa.
      */
     private void imprimePreFixadoRecursivo(NodoArvore<T> no) {
+        if (no != null) {
+            System.out.print(no.objeto + " ");
+            imprimePreFixadoRecursivo(no.filhoEsquerda);
+            imprimePreFixadoRecursivo(no.filhoDireita);
+        }
     }
 
 }
